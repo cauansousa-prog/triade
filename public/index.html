@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tríade</title>
+<meta name="description" content="Tríade reúne a Horizon Wear e a Aurel Gym em um só lugar. Escolha uma loja para entrar.">
+<meta name="theme-color" content="#0E0F12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E0F12'/%3E%3Cpath d='M9 10h14M16 10v13' stroke='%23B79A5B' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0F12; --slate:#17191E; --line:rgba(237,232,222,.14);
+  --bone:#EDE8DE; --mute:#A39F95; --brass:#B79A5B; --dusk:#7D93A8;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--ink);color:var(--bone);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* ---------- Entrada ---------- */
+.home{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:calc(env(safe-area-inset-top,0px) + 40px) 24px calc(env(safe-area-inset-bottom,0px) + 40px);
+  background:radial-gradient(120% 70% at 50% 0%,#1d1f26 0%,var(--ink) 62%)}
+.mark{font-family:var(--display);font-weight:700;font-size:clamp(4.2rem,17vw,11.5rem);line-height:.95;letter-spacing:-.025em;text-align:center}
+.mark span{display:inline-block;opacity:0;transform:translateY(.18em);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.mark span:nth-child(2){animation-delay:.07s}.mark span:nth-child(3){animation-delay:.14s}
+.mark span:nth-child(4){animation-delay:.21s}.mark span:nth-child(5){animation-delay:.28s}.mark span:nth-child(6){animation-delay:.35s}
+@keyframes rise{to{opacity:1;transform:none}}
+.lead{margin-top:20px;color:var(--mute);font-size:1.05rem;text-align:center;max-width:34ch}
+
+.stores{margin-top:clamp(36px,7vh,72px);width:100%;max-width:1040px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.store{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(260px,38vh,360px);
+  text-align:left;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--slate);
+  transition:border-color .25s,transform .25s}
+.store:hover{border-color:rgba(237,232,222,.45);transform:translateY(-3px)}
+.store__art{position:absolute;inset:0}
+.store--horizon .store__art{
+  background:
+    linear-gradient(to bottom,transparent 0 60%,rgba(125,147,168,.9) 60.2% 60.6%,transparent 60.8%),
+    radial-gradient(90% 60% at 50% 60%,rgba(125,147,168,.38),transparent 70%),
+    linear-gradient(to bottom,#14171c 0%,#1d2530 62%,#0f1114 62%,#0b0c0e 100%)}
+.store--aurel .store__art{
+  background:
+    repeating-linear-gradient(115deg,transparent 0 46px,rgba(183,154,91,.10) 46px 47px),
+    radial-gradient(70% 70% at 78% 18%,rgba(183,154,91,.42),transparent 65%),
+    linear-gradient(160deg,#1c1a15,#0f0f0d)}
+.store__body{position:relative;padding:28px 28px 26px;background:linear-gradient(to top,rgba(14,15,18,.92) 35%,transparent)}
+.store__name{display:block;font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-.01em}
+.store__desc{display:block;margin-top:6px;color:var(--mute)}
+.store__go{display:inline-block;margin-top:18px;padding-bottom:3px;font-weight:600;border-bottom:1px solid currentColor}
+.store--horizon .store__go{color:var(--dusk)}
+.store--aurel .store__go{color:var(--brass)}
+.foot{margin-top:28px;color:var(--mute);font-size:.9rem;text-align:center}
+
+/* ---------- Visualizador ---------- */
+.viewer{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--ink)}
+.bar{display:flex;align-items:center;gap:6px;height:calc(env(safe-area-inset-top,0px) + 48px);
+  padding:env(safe-area-inset-top,0px) 10px 0;background:var(--ink);border-bottom:1px solid var(--line)}
+.bar__home{font-family:var(--display);font-weight:700;font-size:1.25rem;padding:6px 12px 6px 6px;margin-right:4px}
+.tab{padding:8px 14px;border-radius:999px;color:var(--mute);font-weight:500;font-size:.95rem;transition:background .2s,color .2s}
+.tab:hover{color:var(--bone)}
+.tab[aria-current="true"]{background:var(--bone);color:var(--ink)}
+.bar__ext{margin-left:auto;color:var(--mute);font-size:.85rem;text-decoration:none;padding:8px 6px;white-space:nowrap}
+.bar__ext:hover{color:var(--bone)}
+.stage{position:relative;flex:1;min-height:0}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--mute);background:var(--ink)}
+
+@media (max-width:760px){
+  .stores{grid-template-columns:1fr}
+  .store{min-height:220px}
+  .bar__ext span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .mark span{animation:none;opacity:1;transform:none}
+  .store{transition:none}.store:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<main class="home" id="home">
+  <h1 class="mark" aria-label="Tríade"><span>T</span><span>r</span><span>í</span><span>a</span><span>d</span><span>e</span></h1>
+  <p class="lead">Escolha uma loja para entrar.</p>
+
+  <div class="stores">
+    <button class="store store--horizon" data-store="horizon" type="button">
+      <span class="store__art" aria-hidden="true"></span>
+      <span class="store__body">
+        <span class="store__name">Horizon Wear</span>
+        <span class="store__desc">Moda masculina premium</span>
+        <span class="store__go">Entrar na loja</span>
+      </span>
+    </button>
+    <button class="store store--aurel" data-store="aurel" type="button">
+      <span class="store__art" aria-hidden="true"></span>
+      <span class="store__body">
+        <span class="store__name">Aurel Gym</span>
+        <span class="store__desc">Roupas para treinar</span>
+        <span class="store__go">Entrar na loja</span>
+      </span>
+    </button>
+  </div>
+  <p class="foot">Você pode trocar de loja a qualquer momento.</p>
+</main>
+
+<section class="viewer" id="viewer" hidden>
+  <nav class="bar" aria-label="Lojas">
+    <button class="bar__home" id="goHome" type="button" aria-label="Voltar ao início do Tríade">Tríade</button>
+    <button class="tab" data-store="horizon" type="button">Horizon Wear</button>
+    <button class="tab" data-store="aurel" type="button">Aurel Gym</button>
+    <a class="bar__ext" id="ext" href="#" target="_blank" rel="noopener"><span>Abrir em nova aba</span></a>
+  </nav>
+  <div class="stage" id="stage"></div>
+</section>
+
+<script>
+(function(){
+  var STORES = {
+    horizon: { name: 'Horizon Wear', url: 'https://horizonwear.vercel.app/' },
+    aurel:   { name: 'Aurel Gym',    url: 'https://aurelgymjk.vercel.app/' }
+  };
+  var home = document.getElementById('home');
+  var viewer = document.getElementById('viewer');
+  var stage = document.getElementById('stage');
+  var ext = document.getElementById('ext');
+  var frames = {};
+
+  function ensureFrame(key){
+    if (frames[key]) return frames[key];
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;inset:0';
+    var load = document.createElement('div');
+    load.className = 'loading';
+    load.textContent = 'Carregando ' + STORES[key].name + '…';
+    var f = document.createElement('iframe');
+    f.title = STORES[key].name;
+    f.src = STORES[key].url;
+    f.allow = 'payment *; clipboard-write; fullscreen';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.addEventListener('load', function(){ load.remove(); });
+    wrap.appendChild(f);
+    wrap.appendChild(load);
+    stage.appendChild(wrap);
+    frames[key] = wrap;
+    return wrap;
+  }
+
+  function openStore(key){
+    home.hidden = true;
+    viewer.hidden = false;
+    Object.keys(STORES).forEach(function(k){
+      if (k === key) ensureFrame(k);
+      if (frames[k]) frames[k].hidden = (k !== key);
+    });
+    document.querySelectorAll('.tab').forEach(function(t){
+      t.setAttribute('aria-current', t.dataset.store === key ? 'true' : 'false');
+    });
+    ext.href = STORES[key].url;
+    document.title = STORES[key].name + ' · Tríade';
+  }
+
+  function goHome(){
+    viewer.hidden = true;
+    home.hidden = false;
+    document.title = 'Tríade';
+  }
+
+  document.querySelectorAll('[data-store]').forEach(function(el){
+    el.addEventListener('click', function(){ openStore(el.dataset.store); });
+  });
+  document.getElementById('goHome').addEventListener('click', goHome);
+})();
+</script>
+</body>
+</html>
