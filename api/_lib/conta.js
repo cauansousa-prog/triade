@@ -56,7 +56,13 @@ function storeConfig(prefix, defaults) {
   return {
     url: (process.env[prefix + '_SUPABASE_URL'] || defaults.url || '').replace(/\/+$/, ''),
     anon: process.env[prefix + '_SUPABASE_ANON_KEY'] || defaults.anon || '',
-    service: String(process.env[prefix + '_SUPABASE_SERVICE_ROLE_KEY'] || '').trim(),
+    service: (() => {
+      const parts = String(process.env[prefix + '_SUPABASE_SERVICE_ROLE_KEY'] || '').split(/\r?\n/).map((part) => part.trim()).filter(Boolean);
+      const unique = [...new Set(parts)];
+      // Aceita apenas uma chave única; se ela foi duplicada em linhas, usa uma cópia.
+      // Valores diferentes causam falha fechada.
+      return unique.length === 1 ? unique[0] : '';
+    })(),
   };
 }
 
@@ -142,7 +148,7 @@ function makeHandler(store) {
       if (!deletion || deletion.verified !== true) await assertUserGone(cfg, session.id);
       return send(res, 200, { ok: true });
     } catch (e) {
-      console.error('[excluir-conta:' + store.id + '] exclusão não concluída:', e.code || '', e.message);
+      console.error('[excluir-conta:' + store.id + '] exclusão não concluída:', e.code || 'erro', e.name || 'Error');
       if (e.code === 'conta_administrativa') return send(res, 403, { ok: false, code: 'conta_administrativa' });
       return send(res, 500, { ok: false, code: 'falha' });
     }
