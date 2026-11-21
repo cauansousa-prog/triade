@@ -1,0 +1,28 @@
+{
+  "id": "/",
+  "name": "Tríade",
+  "short_name": "Tríade",
+  "description": "Acesse Horizon Wear e Aurel Gym em um só lugar.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#07070a",
+  "theme_color": "#08080b",
+  "icons": [
+    {
+      "src": "/Img/triade-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/Img/triade-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
