@@ -56,7 +56,7 @@ function storeConfig(prefix, defaults) {
   return {
     url: (process.env[prefix + '_SUPABASE_URL'] || defaults.url || '').replace(/\/+$/, ''),
     anon: process.env[prefix + '_SUPABASE_ANON_KEY'] || defaults.anon || '',
-    service: process.env[prefix + '_SUPABASE_SERVICE_ROLE_KEY'] || '',
+    service: String(process.env[prefix + '_SUPABASE_SERVICE_ROLE_KEY'] || '').trim(),
   };
 }
 
