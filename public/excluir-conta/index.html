@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Excluir minha conta | Tríade</title>
+<meta name="description" content="Solicite a exclusão da sua conta e dos dados pessoais na Horizon Wear ou na Aurel Gym, lojas do Tríade.">
+<meta name="theme-color" content="#08080b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308080b'/%3E%3Cpath d='M5 25 16 5l11 20-11-7z' fill='none' stroke='%23f5aa13' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#08080b;--panel:#101015;--panel2:#15151b;--line:rgba(255,255,255,.12);
+  --white:#f7f6f8;--muted:#b3b0bd;--gold:#f5ad16;--gold2:#ffcf52;--danger:#ff6b6b;--ok:#4ade80;
+  --accent:var(--gold);--accent-ink:#111;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+body[data-store="aurel"]{--accent:#1460ff;--accent-ink:#fff}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--white);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased;
+  padding:0 0 calc(env(safe-area-inset-bottom,0px) + 32px)}
+[hidden]{display:none!important}
+a{color:var(--gold2)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+header{display:flex;align-items:center;justify-content:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 26px) 20px 22px;border-bottom:1px solid var(--line)}
+header svg{width:38px;height:auto}
+header a{text-decoration:none;color:var(--white);font-weight:800;letter-spacing:.16em;font-size:1.5rem}
+header a span{color:var(--gold)}
+main{max-width:760px;margin:0 auto;padding:36px 20px 20px}
+h1{font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.lead{color:var(--muted);margin-bottom:28px}
+.stores{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.store{position:relative;text-align:left;cursor:pointer;background:var(--panel);border:1.5px solid var(--c);border-radius:16px;padding:20px;
+  display:flex;flex-direction:column;gap:6px;transition:transform .2s,box-shadow .2s;min-height:128px}
+.store:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 22px color-mix(in srgb,var(--c) 22%,transparent)}
+.store--horizon{--c:#f5ad16}.store--aurel{--c:#1460ff}
+.store b{font-size:1.15rem;color:var(--c)}
+.store small{color:var(--muted);font-size:.9rem}
+.store em{margin-top:auto;font-style:normal;font-weight:600;font-size:.92rem}
+.info{margin-top:28px;display:grid;gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.card h2{font-size:1rem;margin-bottom:8px}
+.card ul{padding-left:20px;color:var(--muted);font-size:.95rem}
+.card li{margin:3px 0}
+.card p{color:var(--muted);font-size:.95rem}
+.panel{background:var(--panel);border:1.5px solid var(--accent);border-radius:16px;padding:22px}
+.panel h2{font-size:1.3rem;margin-bottom:4px}
+.steps{display:flex;gap:8px;margin:14px 0 20px}
+.steps i{flex:1;height:4px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--accent)}
+label{display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem}
+input[type=email],input[type=password],input[type=text]{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:1rem}
+input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 35%,transparent)}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{border:0;border-radius:12px;padding:13px 22px;font-weight:700;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn--ghost{background:transparent;border:1px solid var(--line);color:var(--white)}
+.btn--danger{background:var(--danger);color:#1a0505}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.warn{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.45);border-radius:12px;padding:14px 16px;margin:6px 0 4px;font-size:.95rem}
+.warn b{color:var(--danger)}
+.msg{margin-top:14px;font-size:.95rem;min-height:1.3em}
+.msg.err{color:var(--danger)}
+.done{text-align:center;padding:14px 4px}
+.done .ck{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;background:rgba(74,222,128,.15);color:var(--ok);font-size:1.8rem}
+.done h2{margin-bottom:6px}
+.done p{color:var(--muted)}
+footer{max-width:760px;margin:10px auto 0;padding:0 20px;color:var(--muted);font-size:.85rem;text-align:center}
+@media(max-width:560px){.stores{grid-template-columns:1fr}main{padding-top:26px}.btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <svg viewBox="0 0 100 88" aria-hidden="true"><path d="M8 78 50 8l42 70-42-24z" fill="none" stroke="#f5ad16" stroke-width="9"/><path d="m50 54 20 24H30z" fill="#f7f6f8"/></svg>
+  <a href="/" aria-label="Tríade, voltar ao início">TRÍ<span>A</span>DE</a>
+</header>
+
+<main>
+  <section id="pick">
+    <h1>Excluir minha conta</h1>
+    <p class="lead">Selecione a loja na qual deseja solicitar a exclusão da sua conta e dos dados pessoais associados.</p>
+    <div class="stores">
+      <button class="store store--horizon" type="button" data-store="horizon">
+        <b>Horizon Wear</b><small>Excluir conta da Horizon Wear</small><em>Continuar ›</em>
+      </button>
+      <button class="store store--aurel" type="button" data-store="aurel">
+        <b>Aurel Gym</b><small>Excluir conta da Aurel Gym</small><em>Continuar ›</em>
+      </button>
+    </div>
+    <div class="info">
+      <div class="card">
+        <h2>O que será excluído</h2>
+        <ul>
+          <li>Sua conta de acesso (e-mail e senha) na loja escolhida.</li>
+          <li>Dados de perfil, endereços salvos, carrinho e favoritos.</li>
+          <li>Histórico de pedidos e demais dados pessoais associados à conta.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Retenção e outras lojas</h2>
+        <p>Não mantemos dados pessoais da conta depois da exclusão. Registros de pagamento mantidos por operadoras e bancos seguem as obrigações legais deles. A exclusão vale apenas para a loja escolhida: a conta da outra loja não é afetada e, se você usa as duas, repita o processo em cada uma.</p>
+      </div>
+      <div class="card">
+        <h2>Precisa de ajuda?</h2>
+        <p>Se não conseguir concluir, fale com o suporte pela página de Contato da loja: <a href="https://horizonwear.vercel.app/" target="_blank" rel="noopener">Horizon Wear</a> · <a href="https://aurelgymjk.vercel.app/" target="_blank" rel="noopener">Aurel Gym</a>. Você não precisa do aplicativo instalado para fazer esta solicitação.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="panel" hidden>
+    <h2 id="flowTitle"></h2>
+    <div class="steps" aria-hidden="true"><i class="on" id="s1"></i><i id="s2"></i></div>
+
+    <div id="stepId">
+      <p class="lead" style="margin-bottom:0">Informe o e-mail cadastrado e a senha atual para confirmar que a conta é sua.</p>
+      <label for="email">E-mail cadastrado</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required>
+      <label for="pw">Senha atual</label>
+      <input id="pw" type="password" autocomplete="current-password" maxlength="200" required>
+      <div class="msg" id="msg1" role="alert" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn" id="btnVerify" type="button">Continuar</button>
+        <button class="btn btn--ghost" id="btnBack1" type="button">Voltar</button>
+      </div>
+    </div>
+
+    <div id="stepConfirm" hidden>
+      <div class="warn"><b>Atenção: esta ação é irreversível.</b> Sua conta e os dados associados serão excluídos definitivamente e não poderão ser recuperados.</div>
+      <label for="conf">Para confirmar, digite exatamente <b>EXCLUIR</b></label>
+      <input id="conf" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20">
+      <div class="msg" id="msg2" role="alert" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn btn--danger" id="btnDelete" type="button" disabled>Excluir minha conta</button>
+        <button class="btn btn--ghost" id="btnBack2" type="button">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="stepDone" class="done" hidden>
+      <div class="ck" aria-hidden="true">✓</div>
+      <h2>Solicitação concluída</h2>
+      <p>Sua conta foi excluída com sucesso.</p>
+      <div class="row" style="justify-content:center"><a class="btn" href="/" style="text-decoration:none;display:inline-block;text-align:center">Voltar ao Tríade</a></div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Tríade · <a href="/privacidade/">Política de Privacidade</a></footer>
+
+<script>
+(function(){
+  var NAMES = { horizon: 'Horizon Wear', aurel: 'Aurel Gym' };
+  var ERR = {
+    credenciais: 'E-mail ou senha incorretos. Confira os dados e tente novamente.',
+    muitas_tentativas: 'Muitas tentativas. Aguarde alguns minutos e tente novamente.',
+    conta_administrativa: 'Contas administrativas não podem ser excluídas por esta página. Fale com o suporte da loja.',
+    indisponivel: 'O serviço está temporariamente indisponível. Tente mais tarde ou fale com o suporte.',
+    falha: 'Não foi possível concluir a operação. Tente novamente ou entre em contato com o suporte da loja.'
+  };
+  var $ = function(id){ return document.getElementById(id); };
+  var store = null, pwd = '', mail = '', busy = false;
+
+  function show(step){
+    ['stepId','stepConfirm','stepDone'].forEach(function(s){ $(s).hidden = (s !== step); });
+    $('s1').className = 'on'; $('s2').className = (step === 'stepId') ? '' : 'on';
+    $('s1').parentNode.hidden = (step === 'stepDone');
+  }
+  function reset(){ pwd = ''; mail = ''; $('pw').value = ''; $('conf').value = ''; $('btnDelete').disabled = true; $('msg1').textContent = ''; $('msg2').textContent = ''; $('msg1').className = $('msg2').className = 'msg'; }
+  function pick(key){
+    store = key; reset(); $('email').value = '';
+    document.body.dataset.store = key;
+    $('flowTitle').textContent = 'Excluir conta da ' + NAMES[key];
+    $('pick').hidden = true; $('flow').hidden = false; show('stepId');
+    $('email').focus(); window.scrollTo(0, 0);
+  }
+  function back(){ reset(); delete document.body.dataset.store; $('flow').hidden = true; $('pick').hidden = false; store = null; window.scrollTo(0, 0); }
+
+  function call(body){
+    return fetch('/api/excluir-conta/' + store, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'omit', cache: 'no-store',
+      body: JSON.stringify(body)
+    }).then(function(r){ return r.json().catch(function(){ return { ok: false, code: 'falha' }; }); })
+      .catch(function(){ return { ok: false, code: 'falha' }; });
+  }
+  function fail(el, code){ el.textContent = ERR[code] || ERR.falha; el.className = 'msg err'; }
+
+  document.querySelectorAll('.store').forEach(function(b){ b.addEventListener('click', function(){ pick(b.dataset.store); }); });
+  $('btnBack1').addEventListener('click', back);
+  $('btnBack2').addEventListener('click', back);
+
+  $('btnVerify').addEventListener('click', function(){
+    if (busy) return;
+    var e = $('email').value.trim(), p = $('pw').value;
+    if (!e || !p || !$('email').checkValidity()){ fail($('msg1'), 'credenciais'); return; }
+    busy = true; $('btnVerify').disabled = true; $('msg1').className = 'msg'; $('msg1').textContent = 'Verificando…';
+    call({ action: 'verify', email: e, password: p }).then(function(r){
+      busy = false; $('btnVerify').disabled = false;
+      if (r.ok){ mail = e; pwd = p; $('pw').value = ''; $('msg1').textContent = ''; show('stepConfirm'); $('conf').focus(); }
+      else fail($('msg1'), r.code);
+    });
+  });
+  $('pw').addEventListener('keydown', function(ev){ if (ev.key === 'Enter') $('btnVerify').click(); });
+
+  $('conf').addEventListener('input', function(){ $('btnDelete').disabled = ($('conf').value !== 'EXCLUIR') || busy; });
+  $('btnDelete').addEventListener('click', function(){
+    if (busy || $('conf').value !== 'EXCLUIR') return;
+    busy = true; $('btnDelete').disabled = true; $('msg2').className = 'msg'; $('msg2').textContent = 'Excluindo… não feche esta página.';
+    call({ action: 'delete', email: mail, password: pwd, confirm: $('conf').value }).then(function(r){
+      busy = false;
+      if (r.ok){ reset(); show('stepDone'); }
+      else { fail($('msg2'), r.code); $('btnDelete').disabled = ($('conf').value !== 'EXCLUIR'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
