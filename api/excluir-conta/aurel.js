@@ -28,9 +28,9 @@ module.exports = makeHandler({
 
     // Preserva os registros transacionais, removendo os dados pessoais do cliente.
     const anonymize = {
-      customer_user_id: null, customer_name: 'Cliente excluído', customer_email: '',
-      cpf_last4: '', cep: '', address_line: '', address_number: '',
-      complement: '', neighborhood: '', city: '', state: '',
+      customer_user_id: null, customer_name: 'Cliente excluído', customer_email: 'anonimizado@example.invalid',
+      cpf_last4: '0000', cep: '00000000', address_line: 'Dados removidos', address_number: '0',
+      complement: '', neighborhood: 'Removido', city: 'Removido', state: 'NA',
     };
     const filters = ['customer_user_id=eq.' + encodeURIComponent(user.id)];
     if (user.email && !user.email.includes('*')) filters.push('customer_email=ilike.' + encodeURIComponent(likeEscape(user.email)));
