@@ -148,7 +148,8 @@ function makeHandler(store) {
       if (!deletion || deletion.verified !== true) await assertUserGone(cfg, session.id);
       return send(res, 200, { ok: true });
     } catch (e) {
-      console.error('[excluir-conta:' + store.id + '] exclusão não concluída:', e.code || 'erro', e.name || 'Error');
+      const safeMessage = String(e && e.message || 'erro').replace(/sb_secret_[^\\s\"']+/g, '[REDACTED]').replace(/eyJ[A-Za-z0-9._-]+/g, '[REDACTED]').replace(/[\\r\\n]+/g, ' ').slice(0, 180);
+      console.error('[excluir-conta:' + store.id + '] exclusão não concluída:', e.code || 'erro', safeMessage);
       if (e.code === 'conta_administrativa') return send(res, 403, { ok: false, code: 'conta_administrativa' });
       return send(res, 500, { ok: false, code: 'falha' });
     }
