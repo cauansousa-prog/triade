@@ -9,19 +9,25 @@ const DEFAULTS = {
 
 module.exports = makeHandler({
   id: 'horizon',
+  requiresServiceRole: false,
   config: () => storeConfig('HORIZON', DEFAULTS),
-  // Exclusão atômica no próprio banco da Horizon: pedidos, pagamentos, reservas, endereços,
-  // carrinho, favoritos, avaliações, perfil e a conta do Auth (função public.triade_delete_account).
+  // Usa a sessão recém-autenticada do próprio usuário; não depende de service_role.
   async deleteAccount(cfg, user) {
-    const r = await http(cfg.url + '/rest/v1/rpc/triade_delete_account', {
+    const r = await http(cfg.url + '/rest/v1/rpc/triade_delete_my_account', {
       method: 'POST',
-      headers: authHeaders(cfg.service),
-      body: JSON.stringify({ p_user: user.id }),
+      headers: {
+        apikey: cfg.anon,
+        Authorization: 'Bearer ' + user.accessToken,
+        'Content-Type': 'application/json',
+      },
+      body: '{}',
     });
-    if (r.ok) return;
-    const text = await r.text().catch(() => '');
-    const e = new Error('rpc_' + r.status);
-    if (text.includes('conta_administrativa')) e.code = 'conta_administrativa';
-    throw e;
+    if (!r.ok) {
+      const text = await r.text().catch(() => '');
+      const e = new Error('rpc_' + r.status);
+      if (text.includes('conta_administrativa')) e.code = 'conta_administrativa';
+      throw e;
+    }
+    return { verified: true };
   },
 });
