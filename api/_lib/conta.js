@@ -103,7 +103,7 @@ function makeHandler(store) {
     }
 
     const cfg = store.config();
-    if (!cfg.url || !cfg.anon || !cfg.service) {
+    if (!cfg.url || !cfg.anon || (store.requiresServiceRole !== false && !cfg.service)) {
       console.error('[excluir-conta:' + store.id + '] configuração ausente');
       return send(res, 503, { ok: false, code: 'indisponivel' });
     }
@@ -138,8 +138,8 @@ function makeHandler(store) {
     }
 
     try {
-      await store.deleteAccount(cfg, { id: session.id, email: session.email });
-      await assertUserGone(cfg, session.id);
+      const deletion = await store.deleteAccount(cfg, session);
+      if (!deletion || deletion.verified !== true) await assertUserGone(cfg, session.id);
       return send(res, 200, { ok: true });
     } catch (e) {
       console.error('[excluir-conta:' + store.id + '] exclusão não concluída:', e.code || '', e.message);
