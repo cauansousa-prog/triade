@@ -66,6 +66,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .foot:before,.foot:after{content:"";width:clamp(20px,8vw,130px);height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .foot:after{transform:scaleX(-1)}
 
+/* Menu de utilidades do Tríade */
+.menu-tools{position:fixed;z-index:1000;top:calc(env(safe-area-inset-top,0px) + 16px);right:clamp(14px,3vw,30px)}
+.menu-tools__toggle{width:48px;height:48px;display:grid;place-content:center;gap:5px;border:1px solid rgba(245,173,22,.45);border-radius:14px;background:rgba(12,12,16,.92);box-shadow:0 8px 26px #0008;backdrop-filter:blur(12px)}
+.menu-tools__toggle span{display:block;width:21px;height:2px;border-radius:2px;background:var(--white);transition:transform .2s,opacity .2s}
+.menu-tools__toggle[aria-expanded="true"] span:first-child{transform:translateY(7px) rotate(45deg)}
+.menu-tools__toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-tools__toggle[aria-expanded="true"] span:last-child{transform:translateY(-7px) rotate(-45deg)}
+.menu-tools__panel{position:absolute;top:58px;right:0;width:min(260px,calc(100vw - 28px));padding:9px;display:grid;gap:8px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(16,16,21,.98);box-shadow:0 18px 48px #000b;backdrop-filter:blur(16px)}
+.menu-tools__link{display:flex;align-items:center;gap:10px;min-height:46px;padding:11px 13px;border-radius:11px;text-decoration:none;font-size:.9rem;font-weight:700;transition:filter .18s,transform .18s}
+.menu-tools__link:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.menu-tools__link--delete{background:#dc3545;color:#fff}
+.menu-tools__link--privacy{background:#55565d;color:#fff}
+.menu-tools__link svg{width:18px;height:18px;flex:none}
+@media(max-width:420px){.menu-tools{top:calc(env(safe-area-inset-top,0px) + 12px);right:12px}.menu-tools__toggle{width:44px;height:44px}}
+
 /* Visualizador das lojas: comportamento original preservado */
 .viewer{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--bg)}
 .bar{display:flex;align-items:center;gap:8px;min-height:calc(env(safe-area-inset-top,0px) + 58px);padding:env(safe-area-inset-top,0px) 14px 0;background:#09090d;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -100,6 +115,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </style>
 </head>
 <body>
+<div class="menu-tools" id="menuTools">
+  <button class="menu-tools__toggle" id="menuToggle" type="button" aria-label="Abrir menu de opções" aria-expanded="false" aria-controls="menuPanel">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="menu-tools__panel" id="menuPanel" aria-label="Opções do Tríade" hidden>
+    <a class="menu-tools__link menu-tools__link--delete" href="/excluir-conta/" aria-label="Ir para exclusão de conta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14M10 11v5m4-5v5"/></svg>
+      Excluir conta
+    </a>
+    <a class="menu-tools__link menu-tools__link--privacy" href="/privacidade/" aria-label="Ir para política de privacidade">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+      Política de privacidade
+    </a>
+  </nav>
+</div>
 <main class="home" id="home">
   <div class="brand" aria-label="Tríade">
     <svg class="brand-mark" viewBox="0 0 100 88" role="img" aria-label="Símbolo Tríade">
@@ -147,6 +177,26 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   var stage = document.getElementById('stage');
   var ext = document.getElementById('ext');
   var frames = {};
+  var menuToggle = document.getElementById('menuToggle');
+  var menuPanel = document.getElementById('menuPanel');
+
+  function closeMenu(){
+    menuPanel.hidden = true;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu de opções');
+  }
+  menuToggle.addEventListener('click', function(){
+    var opening = menuPanel.hidden;
+    menuPanel.hidden = !opening;
+    menuToggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    menuToggle.setAttribute('aria-label', opening ? 'Fechar menu de opções' : 'Abrir menu de opções');
+  });
+  document.addEventListener('click', function(event){
+    if (!document.getElementById('menuTools').contains(event.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Escape') closeMenu();
+  });
 
   function ensureFrame(key){
     if (frames[key]) return frames[key];
