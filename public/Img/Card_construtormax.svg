@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1498 850" width="1498" height="850">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b0e"/><stop offset=".55" stop-color="#15110a"/><stop offset="1" stop-color="#1d1406"/></linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a05" stop-opacity="0"/><stop offset="1" stop-color="#ff9d00" stop-opacity=".55"/></linearGradient>
+<linearGradient id="yel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd23f"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+<linearGradient id="btn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb81c"/><stop offset="1" stop-color="#ff8a00"/></linearGradient>
+<pattern id="hz" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="20" height="40" fill="#ffc400"/><rect x="20" width="20" height="40" fill="#111"/></pattern>
+<radialGradient id="glow" cx=".75" cy=".85" r=".7"><stop offset="0" stop-color="#ff9d00" stop-opacity=".55"/><stop offset="1" stop-color="#ff9d00" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1498" height="850" fill="url(#bg)"/>
+<rect x="640" width="858" height="850" fill="url(#glow)"/>
+<rect x="640" width="858" height="850" fill="url(#sky)" opacity=".5"/>
+<g fill="#0e0c09" stroke="#ffb81c" stroke-width="3" stroke-opacity=".55">
+<rect x="700" y="470" width="150" height="380"/>
+<rect x="870" y="380" width="190" height="470"/>
+<rect x="1080" y="520" width="130" height="330"/>
+</g>
+<g stroke="#ffb81c" stroke-opacity=".35" stroke-width="2">
+<path d="M870 440h190M870 500h190M870 560h190M870 620h190M870 680h190M870 740h190M870 800h190M935 380v470M1000 380v470"/>
+<path d="M700 530h150M700 590h150M700 650h150M700 710h150M700 770h150M775 470v380"/>
+</g>
+<g fill="#ffcf52" opacity=".85"><rect x="720" y="550" width="26" height="26"/><rect x="800" y="670" width="26" height="26"/><rect x="890" y="520" width="26" height="26"/><rect x="1020" y="640" width="26" height="26"/><rect x="1100" y="600" width="26" height="26"/><rect x="1150" y="720" width="26" height="26"/></g>
+<g stroke="#ffc400" stroke-width="8" fill="none" stroke-linejoin="miter">
+<path d="M1280 850V210"/><path d="M1340 850V210"/>
+<path d="M1280 850l60-80M1340 850l-60-80M1280 770l60-80M1340 770l-60-80M1280 690l60-80M1340 690l-60-80M1280 610l60-80M1340 610l-60-80M1280 530l60-80M1340 530l-60-80M1280 450l60-80M1340 450l-60-80M1280 370l60-80M1340 370l-60-80M1280 290l60-80M1340 290l-60-80"/>
+<path d="M1260 210h-560l560-100"/>
+<path d="M1260 210l140 0v-100"/>
+<path d="M1310 110L720 210"/>
+<path d="M1310 110l95 100"/>
+</g>
+<g fill="url(#yel)"><rect x="1270" y="196" width="80" height="34" rx="4"/><rect x="1352" y="150" width="70" height="60" rx="4"/></g>
+<rect x="1362" y="162" width="24" height="26" fill="#1b1b1f"/>
+<g stroke="#e8e8ea" stroke-width="3"><path d="M760 210V380"/></g>
+<rect x="730" y="380" width="60" height="26" fill="#ffc400"/>
+<path d="M730 380h60" stroke="#111" stroke-width="3"/>
+<rect x="640" y="820" width="858" height="30" fill="url(#hz)" opacity=".95"/>
+<g transform="translate(1030 505) scale(1.5)">
+<path d="M0 90C0 30 40 0 100 0s100 30 100 90z" fill="url(#yel)"/>
+<rect x="-14" y="86" width="228" height="26" rx="13" fill="#f59e0b"/>
+<rect x="84" y="-8" width="32" height="92" rx="10" fill="#ffd23f" stroke="#e08b00" stroke-width="3"/>
+<path d="M28 76C34 44 56 24 88 18" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".5" fill="none"/>
+</g>
+<linearGradient id="lf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a0a0d" stop-opacity=".96"/><stop offset=".7" stop-color="#0a0a0d" stop-opacity=".75"/><stop offset="1" stop-color="#0a0a0d" stop-opacity="0"/></linearGradient>
+<rect width="820" height="850" fill="url(#lf)"/>
+<g transform="translate(86 96)">
+<rect width="128" height="128" rx="22" fill="url(#yel)"/>
+<path d="M30 98V34l34 36 34-36v64" fill="none" stroke="#111" stroke-width="14" stroke-linejoin="miter" stroke-linecap="butt"/>
+</g>
+<text x="86" y="330" font-family="'Arial Black','Montserrat','Segoe UI',Arial,sans-serif" font-weight="900" font-size="112" fill="#f7f6f8" letter-spacing="4">CONSTRUTOR</text>
+<text x="88" y="448" font-family="'Arial Black','Montserrat','Segoe UI',Arial,sans-serif" font-weight="900" font-size="112" fill="#ffb81c" letter-spacing="14">MAX</text>
+<rect x="88" y="480" width="210" height="6" fill="#ffb81c"/>
+<text x="88" y="560" font-family="'Segoe UI',Arial,sans-serif" font-weight="600" font-size="46" fill="#f1eee8">Construção e obras.</text>
+<rect x="86" y="620" width="520" height="116" rx="58" fill="url(#btn)"/>
+<text x="140" y="694" font-family="'Arial Black','Segoe UI',Arial,sans-serif" font-weight="900" font-size="40" fill="#14100a" letter-spacing="1">ACESSAR SITE</text>
+<g transform="translate(500 656)" fill="none" stroke="#14100a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M0 44L44 0M12 0h32v32"/></g>
+</svg>
