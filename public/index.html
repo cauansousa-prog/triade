@@ -68,12 +68,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .store__hint{position:absolute;right:18px;bottom:16px;z-index:2;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#111;font-size:1.4rem;font-weight:700;box-shadow:0 5px 20px #0008;transition:transform .2s}
 .store--aurel .store__hint{background:var(--purple);color:#fff}
 .store:hover .store__hint{transform:translateX(3px)}
-/* Card externo: Construtor Max (abre o site em nova aba) */
+/* Card Construtor Max: abre o site na mesma guia */
 a.store{text-decoration:none;color:inherit}
 .store--construtor{grid-column:1/-1;justify-self:center;width:calc(50% - clamp(18px,2.5vw,38px)/2);border-color:#ff9d00;box-shadow:0 12px 40px rgba(0,0,0,.42),0 0 22px rgba(255,157,0,.16)}
 .store--construtor:hover{box-shadow:0 18px 54px rgba(0,0,0,.58),0 0 30px rgba(255,157,0,.28)}
 .store--construtor .store__hint{background:#ff9d00;color:#111;font-size:1.15rem}
-.store--construtor:hover .store__hint{transform:translate(2px,-2px)}
+.store--construtor:hover .store__hint{transform:translateX(3px)}
 .foot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:clamp(24px,4vh,42px);color:#e6e2eb;text-align:center;font-size:clamp(.75rem,1.35vw,.95rem);font-weight:500}
 .foot-mark{display:grid;place-items:center;color:var(--gold);font-size:1.55rem;font-weight:800}
 .foot:before,.foot:after{content:"";width:clamp(20px,8vw,130px);height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
@@ -170,9 +170,9 @@ a.store{text-decoration:none;color:inherit}
       <img src="/Img/Card_aurelgym.png" alt="Aurel Gym — roupas para treinar">
       <span class="store__hint" aria-hidden="true">›</span>
     </button>
-    <a class="store store--construtor" href="https://construtormax.iceiy.com" target="_blank" rel="noopener noreferrer" aria-label="Abrir o site Construtor Max em uma nova aba">
+    <a class="store store--construtor" href="https://construtormax.iceiy.com" aria-label="Entrar no site Construtor Max">
       <img src="/Img/Card_construtormax.svg" alt="Construtor Max — construção e obras">
-      <span class="store__hint" aria-hidden="true">↗</span>
+      <span class="store__hint" aria-hidden="true">›</span>
     </a>
   </div>
   <p class="foot"><span class="foot-mark" aria-hidden="true">⟳</span>Você pode trocar de loja a qualquer momento.</p>
